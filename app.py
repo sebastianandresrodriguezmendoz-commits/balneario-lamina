@@ -1,9 +1,7 @@
 from flask import Flask, render_template, request, jsonify
+import mysql.connector
 
 app = Flask(__name__)
-
-# Función para conectarse a MySQL en XAMPP
-import mysql.connector
 
 def get_db_connection():
     return mysql.connector.connect(
@@ -14,12 +12,10 @@ def get_db_connection():
         port=3306
     )
 
-# Ruta principal que muestra el sitio web
 @app.route('/')
 def inicio():
     return render_template('mina.html')
 
-# Ruta que recibe los datos del formulario y los guarda en MySQL
 @app.route('/guardar_contacto', methods=['POST'])
 def guardar_contacto():
     datos = request.get_json()
@@ -33,10 +29,11 @@ def guardar_contacto():
         return jsonify({'status': 'error', 'mensaje': 'Por favor llena todos los campos obligatorios.'}), 400
 
     try:
-        conexion = obtener_conexion_bd()
+        conexion = get_db_connection()  # Nombre corregido
         cursor = conexion.cursor()
         
-        sql = "INSERT INTO contactos (nombre, email, telefono, mensaje) VALUES (%s, %s, %s, %s)"
+        # Columna corregida a 'correo'
+        sql = "INSERT INTO contactos (nombre, correo, telefono, mensaje) VALUES (%s, %s, %s, %s)"
         valores = (nombre, email, telefono, mensaje)
         
         cursor.execute(sql, valores)
