@@ -5,65 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Balneario La Mina - Cesar</title>
     
-    <!-- Bootstrap 5 CSS desde CDN -->
+    <!-- Bootstrap 5 CSS & FontAwesome Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <!-- ESTILOS MODO OSCURO GLOBAL -->
     <style>
-        /* Fondo oscuro para toda la página */
         body {
             background-color: #121212;
             color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Barra de navegación oscura */
         .navbar {
             background-color: #1a1a1a !important;
             border-bottom: 1px solid #2d2d2d;
         }
 
-        /* Hero Banner con degradado oscuro hacia el fondo del body */
         .hero-banner {
-            background: linear-gradient(rgba(0, 0, 0, 0.65), #121212), 
+            background: linear-gradient(rgba(0, 0, 0, 0.7), #121212), 
                         url("{{ url_for('static', filename='img/hero.png') }}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             color: #ffffff;
-            padding: 140px 0 100px 0;
+            padding: 130px 0 90px 0;
         }
 
-        /* Tarjetas de la Galería y Formulario en tono oscuro elegante */
         .card, .card-body {
             background-color: #1e1e1e !important;
             border: 1px solid #2d2d2d !important;
             color: #ffffff !important;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,255,204,0.1) !important;
         }
 
         .card-img-top {
-            height: 250px;
+            height: 230px;
             object-fit: cover;
         }
 
-        /* Estilos de los inputs del formulario */
         .form-control {
             background-color: #2b2b2b !important;
             border: 1px solid #444444 !important;
             color: #ffffff !important;
         }
 
-        .form-control::placeholder {
-            color: #aaaaaa !important;
-        }
-
         .form-control:focus {
             background-color: #333333 !important;
             color: #ffffff !important;
-            border-color: #0d6efd !important;
-            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            border-color: #0dcaf0 !important;
         }
 
-        /* Footer oscuro */
+        /* Botón flotante de WhatsApp */
+        .btn-whatsapp {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50px;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-whatsapp:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+
         footer {
             background-color: #1a1a1a;
             color: #aaaaaa;
@@ -73,7 +95,7 @@
 </head>
 <body>
 
-    <!-- Menú de navegación -->
+    <!-- Menú de Navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold text-info" href="#">🌊 Balneario La Mina</a>
@@ -84,99 +106,151 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="#inicio">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contacto">Contáctanos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#restaurantes">Restaurantes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#ubicacion">¿Cómo Llegar?</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- BANNER PRINCIPAL (HERO) CON IMAGEN DE FONDO -->
+    <!-- Banner Principal (Hero) -->
     <header id="inicio" class="hero text-center hero-banner">
         <div class="container">
-            <h1 class="display-3 fw-bold text-white">Bienvenidos al Balneario La Mina</h1>
-            <p class="lead fs-4 text-light">Poza natural de aguas frías y formaciones rocosas únicas en el Río Badillo, Cesar.</p>
-            <a href="#contacto" class="btn btn-warning btn-lg fw-bold mt-3 shadow-lg">Contáctanos Ahora</a>
+            <h1 class="display-3 fw-bold text-white">Balneario La Mina</h1>
+            <p class="lead fs-4 text-light">Piscinas naturales y majestuosas rocas esculpidas en el Río Badillo, Cesar.</p>
+            <a href="#contacto" class="btn btn-info btn-lg fw-bold mt-3 shadow-lg text-dark">Planifica tu Visita</a>
         </div>
     </header>
 
-    <!-- GALERÍA DE FOTOS -->
+    <!-- Galería de Fotos -->
     <section id="galeria" class="py-5">
         <div class="container">
-            <h2 class="text-center mb-4 text-info fw-bold">Galería de Fotos</h2>
+            <h2 class="text-center mb-4 text-info fw-bold"><i class="bi bi-camera me-2"></i>Galería</h2>
             <div class="row g-4">
-
-                <!-- Tarjeta 1 -->
-                <div class="col-md-4">
-                    <div class="card shadow-sm h-100 border-0">
-                        <img src="{{ url_for('static', filename='img/mina1.png') }}" class="card-img-top" alt="Pozas de La Mina">
+                <div class="col-12 col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="{{ url_for('static', filename='img/mina1.png') }}" class="card-img-top" alt="Pozas">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold text-white">Pozas Cristalinas</h5>
-                            <p class="card-text text-secondary">Piscinas naturales profundas ideales para disfrutar de un refrescante baño.</p>
+                            <h5 class="card-title fw-bold text-info">Pozas Cristalinas</h5>
+                            <p class="card-text text-secondary">Aguas frías y profundas ideales para nadar y refrescarse.</p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Tarjeta 2 -->
-                <div class="col-md-4">
-                    <div class="card shadow-sm h-100 border-0">
-                        <img src="{{ url_for('static', filename='img/mina2.png') }}" class="card-img-top" alt="Rocas talladas Río Badillo">
+                <div class="col-12 col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="{{ url_for('static', filename='img/mina2.png') }}" class="card-img-top" alt="Rocas">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold text-white">Rocas Esculpidas</h5>
-                            <p class="card-text text-secondary">Hermosas formaciones de piedra blanca labradas por la corriente del agua.</p>
+                            <h5 class="card-title fw-bold text-info">Rocas Blancas</h5>
+                            <p class="card-text text-secondary">Formaciones rocosas labradas por la corriente del río.</p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Tarjeta 3 -->
-                <div class="col-md-4">
-                    <div class="card shadow-sm h-100 border-0">
-                        <img src="{{ url_for('static', filename='img/mina3.png') }}" class="card-img-top" alt="Paisaje Balneario La Mina">
+                <div class="col-12 col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="{{ url_for('static', filename='img/mina3.png') }}" class="card-img-top" alt="Entorno">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold text-white">Entorno Natural</h5>
-                            <p class="card-text text-secondary">Paisaje de montaña y naturaleza exuberante en las estribaciones de la Sierra Nevada.</p>
+                            <h5 class="card-title fw-bold text-info">Naturaleza Pura</h5>
+                            <p class="card-text text-secondary">Paisaje natural en las faldas de la Sierra Nevada.</p>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- FORMULARIO DE CONTACTO -->
-    <section id="contacto" class="py-5">
+    <!-- Sección de Restaurantes y Gastronomía -->
+    <section id="restaurantes" class="py-5 bg-dark">
+        <div class="container">
+            <h2 class="text-center mb-4 text-info fw-bold"><i class="bi bi-cup-hot me-2"></i>Gastronomía Local</h2>
+            <p class="text-center text-secondary mb-5">Disfruta de la mejor comida típica del Cesar preparada por cocineros locales.</p>
+            
+            <div class="row g-4">
+                <div class="col-12 col-md-6">
+                    <div class="card h-100 p-3">
+                        <div class="d-flex align-items-center">
+                            <div class="fs-1 text-warning me-3"><i class="bi bi-egg-fried"></i></div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Restaurantes de Comida Típica</h5>
+                                <p class="text-secondary mb-0">Sancocho de gallina criolla, chivo guisado, chicharrón con yuca y pescado frito.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card h-100 p-3">
+                        <div class="d-flex align-items-center">
+                            <div class="fs-1 text-info me-3"><i class="bi bi-shop"></i></div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Kioscos y Bebidas</h5>
+                                <p class="text-secondary mb-0">Venta de agua de coco, refrescos helados, cerveza fría y snacks para pasar el día.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección ¿Cómo Llegar? (Mapa) -->
+    <section id="ubicacion" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4 text-info fw-bold"><i class="bi bi-geo-alt me-2"></i>¿Cómo Llegar?</h2>
+            <div class="row align-items-center g-4">
+                <div class="col-12 col-md-6">
+                    <div class="p-3">
+                        <h4 class="fw-bold text-white mb-3">Ubicación y Ruta</h4>
+                        <p class="text-secondary"><i class="bi bi-check-circle-fill text-info me-2"></i> Ubicado a 40 km de Valledupar, vía al corregimiento de Atánquez.</p>
+                        <p class="text-secondary"><i class="bi bi-check-circle-fill text-info me-2"></i> Acceso por carretera pavimentada hasta el puente sobre el Río Badillo.</p>
+                        <p class="text-secondary"><i class="bi bi-check-circle-fill text-info me-2"></i> Transporte público disponible en busetas de servicio intermunicipal desde la terminal.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="ratio ratio-16x9 rounded shadow border border-secondary">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15668.790588267683!2d-73.181827!3d10.680065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e8a60a775a5e305%3A0x6a053c06e2edb893!2sLa%20Mina%2C%20Valledupar%2C%20Cesar!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario de Contacto -->
+    <section id="contacto" class="py-5 bg-dark">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-6">
+                <div class="col-12 col-md-8 col-lg-6">
                     <div class="card shadow p-4">
-                        <h3 class="text-center mb-4 text-info fw-bold">Formulario de Contacto</h3>
-                        
-                        <!-- Mensaje de estado -->
+                        <h3 class="text-center mb-4 text-info fw-bold">Escríbenos</h3>
                         <div id="alertaRespuesta" class="alert d-none" role="alert"></div>
-
                         <form id="formContacto">
                             <div class="mb-3">
-                                <label for="nombre" class="form-label fw-bold text-light">Nombre Completo *</label>
+                                <label for="nombre" class="form-label text-light">Nombre Completo *</label>
                                 <input type="text" id="nombre" class="form-control" placeholder="Ej. Juan Pérez" required>
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label fw-bold text-light">Correo Electrónico *</label>
+                                <label for="email" class="form-label text-light">Correo Electrónico *</label>
                                 <input type="email" id="email" class="form-control" placeholder="ejemplo@correo.com" required>
                             </div>
                             <div class="mb-3">
-                                <label for="telefono" class="form-label fw-bold text-light">Teléfono / Celular</label>
+                                <label for="telefono" class="form-label text-light">Teléfono / Celular</label>
                                 <input type="text" id="telefono" class="form-control" placeholder="Ej. 3001234567">
                             </div>
                             <div class="mb-3">
-                                <label for="mensaje" class="form-label fw-bold text-light">Mensaje *</label>
-                                <textarea id="mensaje" class="form-control" rows="4" placeholder="Escribe tu mensaje o consulta..." required></textarea>
+                                <label for="mensaje" class="form-label text-light">Mensaje *</label>
+                                <textarea id="mensaje" class="form-control" rows="4" placeholder="Escribe tu consulta..." required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary w-100 btn-lg fw-bold">Enviar Mensaje</button>
+                            <button type="submit" class="btn btn-info w-100 btn-lg fw-bold text-dark">Enviar Mensaje</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Botón Flotante de WhatsApp -->
+    <a href="https://wa.me/573000000000?text=Hola,%20deseo%20obtener%20información%20sobre%20el%20Balneario%20La%20Mina" class="btn-whatsapp" target="_blank">
+        <i class="bi bi-whatsapp"></i>
+    </a>
 
     <footer class="text-center py-3">
         <p class="mb-0">&copy; Balneario La Mina. Todos los derechos reservados.</p>
@@ -185,7 +259,6 @@
     <!-- JS de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- LÓGICA JAVASCRIPT -->
     <script>
         document.getElementById('formContacto').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -207,7 +280,6 @@
                 });
 
                 const resultado = await respuesta.json();
-
                 alerta.classList.remove('d-none', 'alert-success', 'alert-danger');
 
                 if (respuesta.ok) {
@@ -218,12 +290,10 @@
                     alerta.classList.add('alert-danger');
                     alerta.textContent = resultado.mensaje;
                 }
-
             } catch (error) {
-                alerta.classList.remove('d-none');
+                alerta.classList.remove('d-none', 'alert-danger');
                 alerta.classList.add('alert-danger');
-                alerta.textContent = 'Ocurrió un error al conectar con el servidor Flask.';
-                console.error('Error:', error);
+                alerta.textContent = 'Error de conexión con el servidor.';
             }
         });
     </script>
