@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Balneario La Mina - Cesar</title>
     
-    <!-- Bootstrap 5 CSS & FontAwesome Icons -->
+    <!-- Bootstrap 5 CSS & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
@@ -28,7 +28,7 @@
             background-position: center;
             background-repeat: no-repeat;
             color: #ffffff;
-            padding: 130px 0 90px 0;
+            padding: 140px 0 100px 0;
         }
 
         .card, .card-body {
@@ -40,12 +40,32 @@
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,255,204,0.1) !important;
+            box-shadow: 0 8px 20px rgba(0, 202, 240, 0.15) !important;
         }
 
         .card-img-top {
-            height: 230px;
+            height: 250px;
             object-fit: cover;
+        }
+
+        .accordion-item {
+            background-color: #1e1e1e !important;
+            border: 1px solid #2d2d2d !important;
+        }
+
+        .accordion-button {
+            background-color: #1e1e1e !important;
+            color: #0dcaf0 !important;
+            box-shadow: none !important;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #2b2b2b !important;
+            color: #ffffff !important;
+        }
+
+        .accordion-body {
+            color: #cccccc !important;
         }
 
         .form-control {
@@ -60,7 +80,6 @@
             border-color: #0dcaf0 !important;
         }
 
-        /* Botón flotante de WhatsApp */
         .btn-whatsapp {
             position: fixed;
             bottom: 25px;
@@ -97,16 +116,18 @@
 
     <!-- Menú de Navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <a class="navbar-brand fw-bold text-info" href="#">🌊 Balneario La Mina</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto fs-5">
                     <li class="nav-item"><a class="nav-link active" href="#inicio">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#restaurantes">Restaurantes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#actividades">Actividades</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#restaurantes">Gastronomía</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">Preguntas Frecuentes</a></li>
                     <li class="nav-item"><a class="nav-link" href="#ubicacion">¿Cómo Llegar?</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
                 </ul>
@@ -114,25 +135,25 @@
         </div>
     </nav>
 
-    <!-- Banner Principal (Hero) -->
+    <!-- Banner Principal -->
     <header id="inicio" class="hero text-center hero-banner">
         <div class="container">
             <h1 class="display-3 fw-bold text-white">Balneario La Mina</h1>
-            <p class="lead fs-4 text-light">Piscinas naturales y majestuosas rocas esculpidas en el Río Badillo, Cesar.</p>
-            <a href="#contacto" class="btn btn-info btn-lg fw-bold mt-3 shadow-lg text-dark">Planifica tu Visita</a>
+            <p class="lead fs-3 text-light">Piscinas naturales y majestuosas rocas esculpidas en el Río Badillo, Cesar.</p>
+            <a href="#contacto" class="btn btn-info btn-lg fw-bold mt-3 shadow-lg text-dark px-4 py-2">Planifica tu Visita</a>
         </div>
     </header>
 
     <!-- Galería de Fotos -->
     <section id="galeria" class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-4 text-info fw-bold"><i class="bi bi-camera me-2"></i>Galería</h2>
+        <div class="container-fluid px-md-5">
+            <h2 class="text-center mb-4 text-info fw-bold display-5"><i class="bi bi-camera me-2"></i>Galería Principal</h2>
             <div class="row g-4">
                 <div class="col-12 col-md-4">
                     <div class="card h-100 shadow-sm border-0">
                         <img src="{{ url_for('static', filename='img/mina1.png') }}" class="card-img-top" alt="Pozas">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold text-info">Pozas Cristalinas</h5>
+                            <h5 class="card-title fw-bold text-info fs-4">Pozas Cristalinas</h5>
                             <p class="card-text text-secondary">Aguas frías y profundas ideales para nadar y refrescarse.</p>
                         </div>
                     </div>
@@ -141,8 +162,8 @@
                     <div class="card h-100 shadow-sm border-0">
                         <img src="{{ url_for('static', filename='img/mina2.png') }}" class="card-img-top" alt="Rocas">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold text-info">Rocas Blancas</h5>
-                            <p class="card-text text-secondary">Formaciones rocosas labradas por la corriente del río.</p>
+                            <h5 class="card-title fw-bold text-info fs-4">Rocas Esculpidas</h5>
+                            <p class="card-text text-secondary">Formaciones de piedra blanca labradas naturalmente por la corriente.</p>
                         </div>
                     </div>
                 </div>
@@ -150,8 +171,8 @@
                     <div class="card h-100 shadow-sm border-0">
                         <img src="{{ url_for('static', filename='img/mina3.png') }}" class="card-img-top" alt="Entorno">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold text-info">Naturaleza Pura</h5>
-                            <p class="card-text text-secondary">Paisaje natural en las faldas de la Sierra Nevada.</p>
+                            <h5 class="card-title fw-bold text-info fs-4">Entorno Natural</h5>
+                            <p class="card-text text-secondary">Paisaje autóctono en las estribaciones de la Sierra Nevada.</p>
                         </div>
                     </div>
                 </div>
@@ -159,31 +180,60 @@
         </div>
     </section>
 
-    <!-- Sección de Restaurantes y Gastronomía -->
-    <section id="restaurantes" class="py-5 bg-dark">
-        <div class="container">
-            <h2 class="text-center mb-4 text-info fw-bold"><i class="bi bi-cup-hot me-2"></i>Gastronomía Local</h2>
-            <p class="text-center text-secondary mb-5">Disfruta de la mejor comida típica del Cesar preparada por cocineros locales.</p>
-            
+    <!-- Actividades e Integración Autóctona -->
+    <section id="actividades" class="py-5 bg-dark">
+        <div class="container-fluid px-md-5">
+            <h2 class="text-center mb-4 text-info fw-bold display-5"><i class="bi bi-water me-2"></i>Experiencias en el Río</h2>
             <div class="row g-4">
                 <div class="col-12 col-md-6">
-                    <div class="card h-100 p-3">
+                    <div class="card h-100 p-4">
+                        <div class="d-flex align-items-start">
+                            <div class="fs-1 text-warning me-3"><i class="bi bi-person-swimming"></i></div>
+                            <div>
+                                <h4 class="fw-bold text-white mb-2">Saltos y Clavados Seguros</h4>
+                                <p class="text-secondary fs-5 mb-0">El balneario cuenta con sectores de pozas profundas demarcadas naturalmente por las rocas blancas, ideales para saltos y clavados. Se recomienda supervisión a menores y precaución con el nivel del río.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card h-100 p-4">
+                        <div class="d-flex align-items-start">
+                            <div class="fs-1 text-info me-3"><i class="bi bi-signpost-split"></i></div>
+                            <div>
+                                <h4 class="fw-bold text-white mb-2">Caminatas por el Cauce y "Toboganes"</h4>
+                                <p class="text-secondary fs-5 mb-0">Recorra a pie el lecho del Río Badillo. La erosión natural del agua sobre las rocas ha moldeado auténticos toboganes de piedra y senderos acuáticos perfectos para sesiones fotográficas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gastronomía Local -->
+    <section id="restaurantes" class="py-5">
+        <div class="container-fluid px-md-5">
+            <h2 class="text-center mb-4 text-info fw-bold display-5"><i class="bi bi-cup-hot me-2"></i>Gastronomía Local</h2>
+            <div class="row g-4">
+                <div class="col-12 col-md-6">
+                    <div class="card h-100 p-4">
                         <div class="d-flex align-items-center">
                             <div class="fs-1 text-warning me-3"><i class="bi bi-egg-fried"></i></div>
                             <div>
-                                <h5 class="fw-bold mb-1">Restaurantes de Comida Típica</h5>
-                                <p class="text-secondary mb-0">Sancocho de gallina criolla, chivo guisado, chicharrón con yuca y pescado frito.</p>
+                                <h4 class="fw-bold mb-1">Platos Típicos del Cesar</h4>
+                                <p class="text-secondary fs-5 mb-0">Sancocho de gallina criolla a la leña, chivo guisado, chicharrón con yuca y pescado frito tradicional.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <div class="card h-100 p-3">
+                    <div class="card h-100 p-4">
                         <div class="d-flex align-items-center">
                             <div class="fs-1 text-info me-3"><i class="bi bi-shop"></i></div>
                             <div>
-                                <h5 class="fw-bold mb-1">Kioscos y Bebidas</h5>
-                                <p class="text-secondary mb-0"> refrescos , cerveza fría y snacks para pasar el día.</p>
+                                <h4 class="fw-bold mb-1">Kioscos y Bebidas</h4>
+                                <p class="text-secondary fs-5 mb-0">Venta de agua de coco fresca, refrescos, cerveza helada y aperitivos locales para disfrutar la estancia.</p>
                             </div>
                         </div>
                     </div>
@@ -192,17 +242,73 @@
         </div>
     </section>
 
-    <!-- Sección ¿Cómo Llegar? (Mapa) -->
+    <!-- Preguntas Frecuentes (FAQ) -->
+    <section id="faq" class="py-5 bg-dark">
+        <div class="container-fluid px-md-5">
+            <h2 class="text-center mb-4 text-info fw-bold display-5"><i class="bi bi-question-circle me-2"></i>Preguntas Frecuentes</h2>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="accordion" id="accordionFAQ">
+
+                        <!-- FAQ 1: Temporada -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq1">
+                                <button class="accordion-button fs-5 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                    ¿Cuál es la mejor temporada para visitar el Balneario La Mina?
+                                </button>
+                            </h2>
+                            <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body fs-6">
+                                    La temporada seca (diciembre a abril) es la más recomendada. Durante estos meses el cauce disminuye, permitiendo apreciar el tono azul cristalino del agua y disfrutar de las pozas tranquilas. En época de lluvias el río aumenta su caudal, ofreciendo un espectáculo visual imponente pero con restricciones de baño por seguridad.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 2: Parqueadero -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq2">
+                                <button class="accordion-button collapsed fs-5 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                    ¿El sitio cuenta con servicio de parqueadero?
+                                </button>
+                            </h2>
+                            <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body fs-6">
+                                    Sí, la zona dispone de espacios habilitados para el estacionamiento de automóviles y motocicletas. Estos son administrados y custodiados por habitantes de la comunidad local mediante una tarifa módica por el cuidado del vehículo.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 3: Señal de celular y conectividad -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq3">
+                                <button class="accordion-button collapsed fs-5 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                    ¿Hay disponibilidad de señal móvil y acceso a red Wi-Fi?
+                                </button>
+                            </h2>
+                            <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body fs-6">
+                                    Existe cobertura telefónica y datos móviles intermitentes (principalmente redes 3G / 4G con operadores como Claro). Se informa a los visitantes que no hay zonas de red Wi-Fi pública o comercial en el corregimiento, por lo cual se sugiere prever sus comunicaciones.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ubicación y Mapa -->
     <section id="ubicacion" class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-4 text-info fw-bold"><i class="bi bi-geo-alt me-2"></i>¿Cómo Llegar?</h2>
+        <div class="container-fluid px-md-5">
+            <h2 class="text-center mb-4 text-info fw-bold display-5"><i class="bi bi-geo-alt me-2"></i>Ubicación y Mapa</h2>
             <div class="row align-items-center g-4">
                 <div class="col-12 col-md-6">
                     <div class="p-3">
-                        <h4 class="fw-bold text-white mb-3">Ubicación y Ruta</h4>
-                        <p class="text-secondary"><i class="bi bi-check-circle-fill text-info me-2"></i> Ubicado a 40 km de Valledupar, vía al corregimiento de Atánquez.</p>
-                        <p class="text-secondary"><i class="bi bi-check-circle-fill text-info me-2"></i> Acceso por carretera pavimentada hasta el puente sobre el Río Badillo.</p>
-                        <p class="text-secondary"><i class="bi bi-check-circle-fill text-info me-2"></i> Transporte público disponible en busetas de servicio intermunicipal desde la terminal.</p>
+                        <h3 class="fw-bold text-white mb-3">¿Cómo Llegar?</h3>
+                        <p class="text-secondary fs-5"><i class="bi bi-check-circle-fill text-info me-2"></i> Distancia aproximada de 40 km desde Valledupar, tomando la vía hacia el corregimiento de Atánquez.</p>
+                        <p class="text-secondary fs-5"><i class="bi bi-check-circle-fill text-info me-2"></i> Acceso vial pavimentado en óptimas condiciones hasta el punto de llegada en el Río Badillo.</p>
+                        <p class="text-secondary fs-5"><i class="bi bi-check-circle-fill text-info me-2"></i> Servicio de transporte público intermunicipal disponible diariamente desde la Terminal de Transportes de Valledupar.</p>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -216,27 +322,27 @@
 
     <!-- Formulario de Contacto -->
     <section id="contacto" class="py-5 bg-dark">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6">
                     <div class="card shadow p-4">
-                        <h3 class="text-center mb-4 text-info fw-bold">Escríbenos</h3>
+                        <h3 class="text-center mb-4 text-info fw-bold">Escríbenos tu Consulta</h3>
                         <div id="alertaRespuesta" class="alert d-none" role="alert"></div>
                         <form id="formContacto">
                             <div class="mb-3">
-                                <label for="nombre" class="form-label text-light">Nombre Completo *</label>
+                                <label for="nombre" class="form-label text-light fw-bold">Nombre Completo *</label>
                                 <input type="text" id="nombre" class="form-control" placeholder="Ej. Juan Pérez" required>
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label text-light">Correo Electrónico *</label>
+                                <label for="email" class="form-label text-light fw-bold">Correo Electrónico *</label>
                                 <input type="email" id="email" class="form-control" placeholder="ejemplo@correo.com" required>
                             </div>
                             <div class="mb-3">
-                                <label for="telefono" class="form-label text-light">Teléfono / Celular</label>
+                                <label for="telefono" class="form-label text-light fw-bold">Teléfono / Celular</label>
                                 <input type="text" id="telefono" class="form-control" placeholder="Ej. 3001234567">
                             </div>
                             <div class="mb-3">
-                                <label for="mensaje" class="form-label text-light">Mensaje *</label>
+                                <label for="mensaje" class="form-label text-light fw-bold">Mensaje *</label>
                                 <textarea id="mensaje" class="form-control" rows="4" placeholder="Escribe tu consulta..." required></textarea>
                             </div>
                             <button type="submit" class="btn btn-info w-100 btn-lg fw-bold text-dark">Enviar Mensaje</button>
