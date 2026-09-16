@@ -12,9 +12,25 @@ def get_db_connection():
         port=3306
     )
 
+# --- RUTA PRINCIPAL CON VIDEOS DE LA BD ---
+
 @app.route('/')
 def inicio():
-    return render_template('mina.html')
+    try:
+        conexion = get_db_connection()
+        cursor = conexion.cursor(dictionary=True)
+        
+        # Consultamos la tabla de videos creada en MySQL
+        cursor.execute("SELECT titulo, descripcion, nombre_archivo FROM videos")
+        videos = cursor.fetchall()
+        
+        cursor.close()
+        conexion.close()
+        
+        return render_template('mina.html', videos=videos)
+    except mysql.connector.Error as err:
+        # En caso de error de conexión, se envía una lista vacía para evitar que caiga la app
+        return render_template('mina.html', videos=[])
 
 # --- RUTAS DE CONTACTO ---
 
@@ -64,7 +80,7 @@ def admin_contactos():
     except mysql.connector.Error as err:
         return f"Error al consultar la base de datos: {err}", 500
 
-# --- NUEVAS RUTAS DE SUGERENCIAS / POSTS ---
+# --- RUTAS DE SUGERENCIAS / POSTS ---
 
 @app.route('/guardar_sugerencia', methods=['POST'])
 def guardar_sugerencia():
@@ -102,7 +118,6 @@ def guardar_sugerencia():
 def obtener_sugerencias():
     try:
         conexion = get_db_connection()
-        # Usamos dictionary=True para que Flask pueda convertir los datos a JSON fácilmente
         cursor = conexion.cursor(dictionary=True)
         
         cursor.execute("SELECT id, nombre, calificacion, sugerencia, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM sugerencias ORDER BY id DESC")
