@@ -8,34 +8,75 @@
     <!-- Bootstrap 5 CSS desde CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- ESTILOS CSS INCLUIDOS EN EL MISMO ARCHIVO -->
+    <!-- ESTILOS MODO OSCURO GLOBAL -->
     <style>
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80');
+        /* Fondo oscuro para toda la página */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        /* Barra de navegación oscura */
+        .navbar {
+            background-color: #1a1a1a !important;
+            border-bottom: 1px solid #2d2d2d;
+        }
+
+        /* Hero Banner con degradado oscuro hacia el fondo del body */
+        .hero-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.65), #121212), 
+                        url("{{ url_for('static', filename='img/hero.png') }}");
             background-size: cover;
             background-position: center;
-            color: white;
-            padding: 120px 0;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            padding: 140px 0 100px 0;
+        }
+
+        /* Tarjetas de la Galería y Formulario en tono oscuro elegante */
+        .card, .card-body {
+            background-color: #1e1e1e !important;
+            border: 1px solid #2d2d2d !important;
+            color: #ffffff !important;
         }
 
         .card-img-top {
-            height: 220px;
+            height: 250px;
             object-fit: cover;
         }
 
+        /* Estilos de los inputs del formulario */
+        .form-control {
+            background-color: #2b2b2b !important;
+            border: 1px solid #444444 !important;
+            color: #ffffff !important;
+        }
+
+        .form-control::placeholder {
+            color: #aaaaaa !important;
+        }
+
+        .form-control:focus {
+            background-color: #333333 !important;
+            color: #ffffff !important;
+            border-color: #0d6efd !important;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+
+        /* Footer oscuro */
         footer {
-            background-color: #0d6efd;
-            color: white;
+            background-color: #1a1a1a;
+            color: #aaaaaa;
+            border-top: 1px solid #2d2d2d;
         }
     </style>
 </head>
 <body>
 
     <!-- Menú de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">🌊 Balneario La Mina</a>
+            <a class="navbar-brand fw-bold text-info" href="#">🌊 Balneario La Mina</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -49,87 +90,84 @@
         </div>
     </nav>
 
-
-
-    <!-- Galería de Fotos -->
-   <!-- BANNER PRINCIPAL (HERO) CON IMAGEN DE FONDO -->
-<header id="inicio" class="hero text-center" style="background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('{{ url_for('static', filename='img/hero.png') }}'); background-size: cover; background-position: center; color: white; padding: 130px 0;">
-    <div class="container">
-        <h1 class="display-3 fw-bold">Bienvenidos al Balneario La Mina</h1>
-        <p class="lead fs-4">Poza natural de aguas frías y formaciones rocosas únicas en el Río Badillo, Cesar.</p>
-        <a href="#contacto" class="btn btn-warning btn-lg fw-bold mt-3 shadow">Contáctanos Ahora</a>
-    </div>
-</header>
-
-<!-- GALERÍA DE FOTOS -->
-<section id="galeria" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-4 text-primary fw-bold">Galería de Fotos</h2>
-        <div class="row g-4">
-
-            <!-- Tarjeta 1 -->
-            <div class="col-md-4">
-                <div class="card shadow-sm h-100 border-0">
-                    <img src="{{ url_for('static', filename='img/mina1.png') }}" class="card-img-top" alt="Pozas de La Mina" style="height: 250px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold text-dark">Pozas Cristalinas</h5>
-                        <p class="card-text text-muted">Piscinas naturales profundas ideales para disfrutar de un refrescante baño.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 2 -->
-            <div class="col-md-4">
-                <div class="card shadow-sm h-100 border-0">
-                    <img src="{{ url_for('static', filename='img/mina2.png') }}" class="card-img-top" alt="Rocas talladas Río Badillo" style="height: 250px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold text-dark">Rocas Esculpidas</h5>
-                        <p class="card-text text-muted">Hermosas formaciones de piedra blanca labradas por la corriente del agua.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 3 -->
-            <div class="col-md-4">
-                <div class="card shadow-sm h-100 border-0">
-                    <img src="{{ url_for('static', filename='img/mina3.png') }}" class="card-img-top" alt="Paisaje Balneario La Mina" style="height: 250px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold text-dark">Entorno Natural</h5>
-                        <p class="card-text text-muted">Paisaje de montaña y naturaleza exuberante en las estribaciones de la Sierra Nevada.</p>
-                    </div>
-                </div>
-            </div>
-
+    <!-- BANNER PRINCIPAL (HERO) CON IMAGEN DE FONDO -->
+    <header id="inicio" class="hero text-center hero-banner">
+        <div class="container">
+            <h1 class="display-3 fw-bold text-white">Bienvenidos al Balneario La Mina</h1>
+            <p class="lead fs-4 text-light">Poza natural de aguas frías y formaciones rocosas únicas en el Río Badillo, Cesar.</p>
+            <a href="#contacto" class="btn btn-warning btn-lg fw-bold mt-3 shadow-lg">Contáctanos Ahora</a>
         </div>
-    </div>
-</section>
+    </header>
 
-    <!-- Formulario de Contacto -->
+    <!-- GALERÍA DE FOTOS -->
+    <section id="galeria" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4 text-info fw-bold">Galería de Fotos</h2>
+            <div class="row g-4">
+
+                <!-- Tarjeta 1 -->
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 border-0">
+                        <img src="{{ url_for('static', filename='img/mina1.png') }}" class="card-img-top" alt="Pozas de La Mina">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-white">Pozas Cristalinas</h5>
+                            <p class="card-text text-secondary">Piscinas naturales profundas ideales para disfrutar de un refrescante baño.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2 -->
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 border-0">
+                        <img src="{{ url_for('static', filename='img/mina2.png') }}" class="card-img-top" alt="Rocas talladas Río Badillo">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-white">Rocas Esculpidas</h5>
+                            <p class="card-text text-secondary">Hermosas formaciones de piedra blanca labradas por la corriente del agua.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 3 -->
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 border-0">
+                        <img src="{{ url_for('static', filename='img/mina3.png') }}" class="card-img-top" alt="Paisaje Balneario La Mina">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-white">Entorno Natural</h5>
+                            <p class="card-text text-secondary">Paisaje de montaña y naturaleza exuberante en las estribaciones de la Sierra Nevada.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMULARIO DE CONTACTO -->
     <section id="contacto" class="py-5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6">
                     <div class="card shadow p-4">
-                        <h3 class="text-center mb-4 text-primary fw-bold">Formulario de Contacto</h3>
+                        <h3 class="text-center mb-4 text-info fw-bold">Formulario de Contacto</h3>
                         
-                        <!-- Mensaje de estado (se muestra dinámicamente con JS) -->
+                        <!-- Mensaje de estado -->
                         <div id="alertaRespuesta" class="alert d-none" role="alert"></div>
 
                         <form id="formContacto">
                             <div class="mb-3">
-                                <label for="nombre" class="form-label fw-bold">Nombre Completo *</label>
+                                <label for="nombre" class="form-label fw-bold text-light">Nombre Completo *</label>
                                 <input type="text" id="nombre" class="form-control" placeholder="Ej. Juan Pérez" required>
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label fw-bold">Correo Electrónico *</label>
+                                <label for="email" class="form-label fw-bold text-light">Correo Electrónico *</label>
                                 <input type="email" id="email" class="form-control" placeholder="ejemplo@correo.com" required>
                             </div>
                             <div class="mb-3">
-                                <label for="telefono" class="form-label fw-bold">Teléfono / Celular</label>
+                                <label for="telefono" class="form-label fw-bold text-light">Teléfono / Celular</label>
                                 <input type="text" id="telefono" class="form-control" placeholder="Ej. 3001234567">
                             </div>
                             <div class="mb-3">
-                                <label for="mensaje" class="form-label fw-bold">Mensaje *</label>
+                                <label for="mensaje" class="form-label fw-bold text-light">Mensaje *</label>
                                 <textarea id="mensaje" class="form-control" rows="4" placeholder="Escribe tu mensaje o consulta..." required></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary w-100 btn-lg fw-bold">Enviar Mensaje</button>
@@ -147,12 +185,11 @@
     <!-- JS de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- LÓGICA JAVASCRIPT INCLUIDA EN EL MISMO ARCHIVO -->
+    <!-- LÓGICA JAVASCRIPT -->
     <script>
         document.getElementById('formContacto').addEventListener('submit', async function(e) {
-            e.preventDefault(); // Evita que la página se recargue al enviar
+            e.preventDefault();
 
-            // Obtener los datos digitados
             const datos = {
                 nombre: document.getElementById('nombre').value,
                 email: document.getElementById('email').value,
@@ -163,7 +200,6 @@
             const alerta = document.getElementById('alertaRespuesta');
 
             try {
-                // Petición AJAX al backend Flask
                 const respuesta = await fetch('/guardar_contacto', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -177,7 +213,7 @@
                 if (respuesta.ok) {
                     alerta.classList.add('alert-success');
                     alerta.textContent = resultado.mensaje;
-                    document.getElementById('formContacto').reset(); // Limpia el formulario
+                    document.getElementById('formContacto').reset();
                 } else {
                     alerta.classList.add('alert-danger');
                     alerta.textContent = resultado.mensaje;
