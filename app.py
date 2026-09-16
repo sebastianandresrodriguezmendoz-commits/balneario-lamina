@@ -29,10 +29,9 @@ def guardar_contacto():
         return jsonify({'status': 'error', 'mensaje': 'Por favor llena todos los campos obligatorios.'}), 400
 
     try:
-        conexion = get_db_connection()  # Nombre corregido
+        conexion = get_db_connection()
         cursor = conexion.cursor()
         
-        # Columna corregida a 'correo'
         sql = "INSERT INTO contactos (nombre, correo, telefono, mensaje) VALUES (%s, %s, %s, %s)"
         valores = (nombre, email, telefono, mensaje)
         
@@ -46,6 +45,24 @@ def guardar_contacto():
 
     except mysql.connector.Error as err:
         return jsonify({'status': 'error', 'mensaje': f'Error en la base de datos: {err}'}), 500
+
+# --- NUEVA RUTA PARA VER LOS MENSAJES GUARDADOS ---
+@app.route('/admin')
+def admin_contactos():
+    try:
+        conexion = get_db_connection()
+        cursor = conexion.cursor()
+        
+        # Traemos todos los registros ordenados desde el más reciente
+        cursor.execute("SELECT id, nombre, correo, telefono, mensaje, fecha FROM contactos ORDER BY id DESC")
+        contactos = cursor.fetchall()
+        
+        cursor.close()
+        conexion.close()
+        
+        return render_template('admin.html', contactos=contactos)
+    except mysql.connector.Error as err:
+        return f"Error al consultar la base de datos: {err}", 500
 
 if __name__ == '__main__':
     app.run(debug=True)
