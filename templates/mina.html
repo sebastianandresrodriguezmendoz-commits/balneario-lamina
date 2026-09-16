@@ -125,6 +125,7 @@
                 <ul class="navbar-nav ms-auto fs-5">
                     <li class="nav-item"><a class="nav-link active" href="#inicio">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#videos">Videos</a></li>
                     <li class="nav-item"><a class="nav-link" href="#actividades">Actividades</a></li>
                     <li class="nav-item"><a class="nav-link" href="#restaurantes">Gastronomía</a></li>
                     <li class="nav-item"><a class="nav-link" href="#faq">Preguntas Frecuentes</a></li>
@@ -176,6 +177,80 @@
                         <div class="card-body">
                             <h5 class="card-title fw-bold text-info fs-4">Entorno Natural</h5>
                             <p class="card-text text-secondary">Paisaje autóctono en las estribaciones de la Sierra Nevada.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Videos del Río Badillo / La Mina -->
+    <section id="videos" class="py-5 bg-dark border-top border-secondary">
+        <div class="container-fluid px-md-5">
+            <h2 class="text-center mb-4 text-info fw-bold display-5"><i class="bi bi-film me-2"></i>Videos del Río Badillo</h2>
+            <p class="text-center text-secondary mb-5 fs-5">Explora en video los paisajes y pozos naturales del Balneario La Mina.</p>
+            
+            <div class="row g-4">
+                <!-- Video 1 -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-secondary">
+                        <div class="ratio ratio-16x9">
+                            <video controls preload="metadata" style="border-radius: 5px 5px 0 0;">
+                                <source src="{{ url_for('static', filename='videos/Grabación 2026-09-16 113627.mp4') }}" type="video/mp4">
+                                Tu navegador no soporta reproductor de video.
+                            </video>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-info fw-bold">Vista del Río Badillo</h5>
+                            <p class="card-text text-secondary">Aguas cristalinas sobre formaciones rocosas naturales.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-secondary">
+                        <div class="ratio ratio-16x9">
+                            <video controls preload="metadata" style="border-radius: 5px 5px 0 0;">
+                                <source src="{{ url_for('static', filename='videos/Grabación 2026-09-16 113151.mp4') }}" type="video/mp4">
+                                Tu navegador no soporta reproductor de video.
+                            </video>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-info fw-bold">Pozos Naturales</h5>
+                            <p class="card-text text-secondary">Zonas ideales para bañarse y disfrutar en familia.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-secondary">
+                        <div class="ratio ratio-16x9">
+                            <video controls preload="metadata" style="border-radius: 5px 5px 0 0;">
+                                <source src="{{ url_for('static', filename='videos/Grabación 2026-09-16 105638.mp4') }}" type="video/mp4">
+                                Tu navegador no soporta reproductor de video.
+                            </video>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-info fw-bold">Paisaje de La Mina</h5>
+                            <p class="card-text text-secondary">Entorno natural rodeado de montañas y vegetación.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 4 -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-secondary">
+                        <div class="ratio ratio-16x9">
+                            <video controls preload="metadata" style="border-radius: 5px 5px 0 0;">
+                                <source src="{{ url_for('static', filename='videos/Grabación 2026-09-16 105333.mp4') }}" type="video/mp4">
+                                Tu navegador no soporta reproductor de video.
+                            </video>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-info fw-bold">Experiencia en La Mina</h5>
+                            <p class="card-text text-secondary">Un sitio turístico inolvidable para visitar en el Cesar.</p>
                         </div>
                     </div>
                 </div>
@@ -569,6 +644,9 @@
             }
         }
 
+        // Cargar clima al iniciar
+        obtenerClima();
+
         // 3. Procesar Envío del Buzón de Sugerencias
         document.getElementById('formSugerencias').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -601,8 +679,6 @@
                 alerta.textContent = 'Error de conexión con el servidor.';
             }
         });
-
-        document.addEventListener('DOMContentLoaded', obtenerClima);
     </script>
 </body>
-</html>+
+</html>
