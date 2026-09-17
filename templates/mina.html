@@ -330,28 +330,28 @@
     </section>
 
     <!-- Estado del Tiempo / Clima en Vivo -->
-    <section id="clima" class="py-5">
-        <div class="container-fluid px-md-5">
-            <h2 class="text-center mb-4 text-info fw-bold display-5"><i class="bi bi-cloud-sun me-2"></i>Estado del Tiempo</h2>
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8 col-lg-6">
-                    <div class="card text-center p-4 border-info shadow">
-                        <div class="card-body">
-                            <h4 class="card-title fw-bold text-white mb-2">Pronóstico en La Mina (Valledupar)</h4>
-                            <p class="text-secondary mb-3">Consulta si el día está soleado e ideal para disfrutar del Río Badillo.</p>
-                            
-                            <div id="climaContenedor" class="py-3">
-                                <div class="spinner-border text-info" role="status">
-                                    <span class="visually-hidden">Cargando clima...</span>
-                                </div>
-                                <p class="text-secondary mt-2">Obteniendo temperatura en tiempo real...</p>
+  <section id="clima" class="py-5">
+    <div class="container-fluid px-md-5">
+        <h2 class="text-center mb-4 text-info fw-bold display-5"><i class="bi bi-cloud-sun me-2"></i>Estado del Tiempo</h2>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="card text-center p-4 border-info shadow bg-dark text-white">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold text-white mb-2">Pronóstico en La Mina (Valledupar)</h4>
+                        <p class="text-secondary mb-3">Consulta si el día está soleado e ideal para disfrutar del Río Badillo.</p>
+                        
+                        <div id="climaContenedor" class="py-3">
+                            <div class="spinner-border text-info" role="status">
+                                <span class="visually-hidden">Cargando clima...</span>
                             </div>
+                            <p class="text-secondary mt-2">Obteniendo temperatura en tiempo real...</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Horarios y Recomendaciones de Afluencia -->
     <section id="afluencia" class="py-5 bg-dark border-top border-secondary">
@@ -633,5 +633,42 @@
             }
         });
     </script>
+    // --- CÓDIGO DEL CLIMA ---
+    async function cargarClima() {
+        const contenedor = document.getElementById('climaContenedor');
+        
+        const lat = 10.4631;
+        const lon = -73.2532;
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+
+        try {
+            const respuesta = await fetch(url);
+            const datos = await respuesta.json();
+            const clima = datos.current_weather;
+
+            let estado = "☀️ Día soleado e ideal para el río";
+            if (clima.weathercode >= 1 && clima.weathercode <= 3) {
+                estado = "Parcialmente nublado";
+            } else if (clima.weathercode >= 45) {
+                estado = "🌧️ Posibles lluvias en la zona";
+            }
+
+            contenedor.innerHTML = `
+                <h1 class="display-2 fw-bold text-info my-2">${Math.round(clima.temperature)}°C</h1>
+                <p class="fs-5 text-warning mb-1">${estado}</p>
+                <small class="text-secondary">Viento a ${Math.round(clima.windspeed)} km/h • Actualizado en vivo</small>
+            `;
+
+        } catch (error) {
+            console.error("Error al cargar el clima:", error);
+            contenedor.innerHTML = `
+                <h1 class="display-2 fw-bold text-info my-2">34°C</h1>
+                <p class="fs-5 text-warning mb-1">☀️ Clima cálido habitual</p>
+                <small class="text-secondary">Condición estimada para la zona</small>
+            `;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', cargarClima);
 </body>
 </html>
