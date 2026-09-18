@@ -264,7 +264,7 @@
                             <div class="fs-1 text-info me-3"><i class="bi bi-shop"></i></div>
                             <div>
                                 <h4 class="fw-bold mb-1">Kioscos y Bebidas</h4>
-                                <p class="text-secondary fs-5 mb-0">Venta de agua de coco fresca, refrescos, cerveza helada y aperitivos locales para disfrutar la estancia.</p>
+                                <p class="text-secondary fs-5 mb-0">Venta de agua  fresca, refrescos, cerveza helada y aperitivos locales para disfrutar la estancia.</p>
                             </div>
                         </div>
                     </div>
@@ -329,8 +329,8 @@
         </div>
     </section>
 
-    <!-- Estado del Tiempo / Clima en Vivo -->
-  <section id="clima" class="py-5">
+   <!-- Sección Estado del Tiempo -->
+<section id="clima" class="py-5">
     <div class="container-fluid px-md-5">
         <h2 class="text-center mb-4 text-info fw-bold display-5"><i class="bi bi-cloud-sun me-2"></i>Estado del Tiempo</h2>
         <div class="row justify-content-center">
@@ -633,7 +633,8 @@
             }
         });
     </script>
-    // --- CÓDIGO DEL CLIMA ---
+    <!-- CÓDIGO JAVASCRIPT DEL CLIMA EN TIEMPO REAL -->
+    <script>
     async function cargarClima() {
         const contenedor = document.getElementById('climaContenedor');
         
@@ -648,7 +649,7 @@
 
             let estado = "☀️ Día soleado e ideal para el río";
             if (clima.weathercode >= 1 && clima.weathercode <= 3) {
-                estado = "Parcialmente nublado";
+                estado = "⛅ Parcialmente nublado";
             } else if (clima.weathercode >= 45) {
                 estado = "🌧️ Posibles lluvias en la zona";
             }
@@ -670,5 +671,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', cargarClima);
+    </script>
+
 </body>
 </html>
