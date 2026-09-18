@@ -677,6 +677,59 @@
 
     document.addEventListener('DOMContentLoaded', cargarClima);
     </script>
+    <script>
+async function cargarClima() {
+    const contenedor = document.getElementById('climaContenedor');
+    const banner = document.getElementById('bannerRio');
+    const textoBanner = document.getElementById('textoBannerRio');
+    
+    const lat = 10.4631;
+    const lon = -73.2532;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+
+    try {
+        const respuesta = await fetch(url);
+        const datos = await respuesta.json();
+        const clima = datos.current_weather;
+
+        let estado = "☀️ Día soleado e ideal para el río";
+        
+        // Ajuste automático del Banner
+        if (banner && textoBanner) {
+            if (clima.weathercode >= 51) {
+                banner.className = "alert alert-danger text-center rounded-0 m-0 py-2 border-0 fw-bold";
+                textoBanner.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-2"></i>ALERTA: Lluvias o tormentas registradas. Se recomienda precaución en el río.';
+                estado = "🌧️ Lluvias / Alerta de creciente";
+            } else if (clima.weathercode >= 1 && clima.weathercode <= 48) {
+                banner.className = "alert alert-warning text-dark text-center rounded-0 m-0 py-2 border-0 fw-bold";
+                textoBanner.innerHTML = '<i class="bi bi-info-circle-fill me-2"></i>PRECAUCIÓN: Día nublado o con brisa alta. Manténgase atento al nivel del agua.';
+                estado = "⛅ Parcialmente nublado";
+            } else {
+                banner.className = "alert alert-success text-center rounded-0 m-0 py-2 border-0 fw-bold";
+                textoBanner.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>ESTADO ÓPTIMO: Tiempo seco y despejado en La Mina. Excelente día para baño recreativo.';
+            }
+        }
+
+        // Ajuste de la tarjeta del clima
+        if (contenedor) {
+            contenedor.innerHTML = `
+                <h1 class="display-2 fw-bold text-info my-2">${Math.round(clima.temperature)}°C</h1>
+                <p class="fs-5 text-warning mb-1">${estado}</p>
+                <small class="text-secondary">Viento a ${Math.round(clima.windspeed)} km/h • Actualizado en vivo</small>
+            `;
+        }
+
+    } catch (error) {
+        console.error("Error al cargar el clima:", error);
+        if (banner && textoBanner) {
+            banner.className = "alert alert-success text-center rounded-0 m-0 py-2 border-0 fw-bold";
+            textoBanner.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>ESTADO ÓPTIMO: Tiempo seco en La Mina. Ideal para visitar.';
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', cargarClima);
+</script>
 
 </body>
 </html>
